@@ -1,13 +1,11 @@
 ---
 layout: page
-title: 
+title: Disclaimer
 permalink: /FTC/
 ---
 
-<h1 style="text-align: center;">
-<span class="title-underline">FTC 免責聲明</span>
-</h1>
-  
+
+
 <div>
   <p>This website is completely produced and designed by Boyi Fu, and belongs to a personal technical exchange website. All interpretation rights belong to Boyi Fu.</p>
   <br/>

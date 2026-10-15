@@ -1,14 +1,10 @@
 ---
 layout: page
-title:
+title: Privacy policy
 permalink: /privacy/
 ---
 
-<h1 style="text-align: center;">
-<span class="title-underline">Privacy-Policy</span> 
-<br/>
-<span class="title-underline">隱私權政策</span>
-</h1>
+
 
 <div>
 Welcome to https://boyifu-ai.github.io/ (hereinafter referred to as 'the Website'). To ensure that you can comfortably utilize our services and access information on our platform with confidence, we would like to elucidate our privacy protection policy aimed at safeguarding your rights and interests.Kindly review the content below.<br/>

@@ -1,19 +1,5 @@
 ---
 layout: default
 ---
-
-<style>
-.title-underline {
-  border-bottom: 4px solid #879CEB;
-  display: inline-block; 
-}
-</style>
-
-<article class="page">
-
-  <h1>{{ page.title }}</h1>
-
-  <div class="entry">
-    {{ content }}
-  </div>
-</article>
+<header class="page-heading"><h1>{{ page.title }}</h1>{% if page.subtitle %}<p class="page-subtitle">{{ page.subtitle }}</p>{% endif %}</header>
+<div class="prose page-content">{{ content }}</div>

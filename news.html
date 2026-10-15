@@ -1,0 +1,15 @@
+---
+layout: default
+title: News
+nav: news
+permalink: /news/
+---
+<header class="page-heading"><h1>News<span lang="zh-Hant">近況</span></h1></header>
+<section class="archive" aria-label="News archive">
+  <div class="archive-tools"><label class="search-field"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.5"/></svg><span class="sr-only">Search news</span><input type="search" id="news-search" placeholder="Search news, papers, or milestones…" autocomplete="off"></label><div class="filters" role="group" aria-label="Filter news"><button class="filter active" data-filter="all" aria-pressed="true">All</button><button class="filter" data-filter="paper" aria-pressed="false">Research</button><button class="filter" data-filter="news" aria-pressed="false">Life & awards</button></div></div>
+  <p id="search-status" class="search-status" role="status" aria-live="polite">{{ site.posts.size }} updates</p>
+  <div class="news-list" id="news-archive">{% for post in site.posts %}{% assign key = post.url | remove: '/' %}<article class="news-row archive-row" data-kind="{% if post.tags contains 'paper' %}paper{% else %}news{% endif %}" data-search="{{ post.title | append: ' ' | append: post.excerpt | strip_html | escape }}"><time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%d %b %Y' }}</time><div><span class="archive-category">{% if post.tags contains 'paper' %}Publication{% else %}Life & awards{% endif %}</span><h2><a href="{{ post.url | relative_url }}">{{ site.data.news[key] | default: post.title }}</a></h2></div><span class="news-arrow" aria-hidden="true">↗</span></article>{% endfor %}</div>
+  <div id="no-results" class="empty-state" hidden><h2>No matching updates</h2><p>Try another keyword or reset the filters.</p><button id="reset-search" class="button" type="button">Show all news</button></div>
+  <div id="pagination" class="pagination" aria-label="News pages" hidden></div>
+  <noscript><p>All updates are shown. Enable JavaScript to use search and filters.</p></noscript>
+</section>

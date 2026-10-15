@@ -1,281 +1,79 @@
-(function () {
-  function formatCount(value) {
-    var count = Number(value) || 0;
-    if (count >= 1000000) {
-      var millions = Math.floor(count / 100000) / 10;
-      return (millions % 1 === 0 ? String(millions.toFixed(0)) : millions.toFixed(1)) + "M+";
+(() => {
+  'use strict';
+  const root = document.getElementById('visitor-map');
+  if (!root) return;
+  const canvas = document.getElementById('visitor-map-canvas');
+  const totalElement = document.getElementById('visitor-map-total');
+  const status = document.getElementById('visitor-map-status');
+  const baseline = Number(root.dataset.baseline) || 0;
+  const local = root.dataset.mode !== 'production' || ['localhost','127.0.0.1','::1','[::1]'].includes(location.hostname);
+  const endpoints = [...new Set([root.dataset.endpoint,root.dataset.fallbackEndpoint].filter(Boolean).map(value=>value.replace(/\/+$/,'')))];
+  let map, collected = false;
+  const formatCount = value => value >= 1000000 ? (Math.floor(value / 100000) / 10) + 'M+' : value >= 1000 ? Math.floor(value / 1000) + 'K+' : String(value);
+  totalElement.textContent = formatCount(baseline);
+  async function request(url) {
+    const controller = new AbortController();
+    const timer = setTimeout(()=>controller.abort(),7000);
+    try {
+      const response = await fetch(url,{signal:controller.signal,credentials:'omit'});
+      if (!response.ok) throw new Error('Visitor data is unavailable');
+      return await response.json();
+    } finally { clearTimeout(timer); }
+  }
+  function recordVisit() {
+    if (local || collected || !endpoints.length) return;
+    let consent;
+    try { consent = localStorage.getItem('boyifu-analytics'); } catch {}
+    if (consent !== 'granted') return;
+    collected = true;
+    request(endpoints[0] + '/collect?path=' + encodeURIComponent(location.pathname)).catch(()=>{});
+  }
+  // The public map stays visible independently of optional visit collection.
+  document.addEventListener('visitor-consent',event=>{if(event.detail==='granted') recordVisit();});
+  recordVisit();
+  function drawMap(locations) {
+    if (!window.L) { status.textContent = 'The map could not load. Please refresh to try again.'; return; }
+    if (!map) {
+      map = L.map(canvas,{scrollWheelZoom:false,zoomControl:true,zoomSnap:.25,zoomDelta:.5,minZoom:0,maxZoom:6,worldCopyJump:true}).setView([20,0],.5);
+      const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{minZoom:0,maxZoom:6,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
+      // A failed tile must never hide the entire visitor map.
+      tiles.addTo(map);
+      new ResizeObserver(()=>map.invalidateSize({pan:false})).observe(canvas);
     }
-    if (count >= 1000) {
-      return Math.floor(count / 1000) + "K+";
+    const markers = L.featureGroup().addTo(map);
+    for (const item of locations) {
+      const latitude = Number(item.latitude), longitude = Number(item.longitude);
+      if (!Number.isFinite(latitude)||!Number.isFinite(longitude)||Math.abs(latitude)>90||Math.abs(longitude)>180) continue;
+      const marker = L.circleMarker([latitude,longitude],{radius:Math.max(3.5,Math.min(10,3.1+Math.log10((Number(item.visits)||0)+1)*1.15)),color:'#254d69',weight:1.25,fillColor:'#9b2f3f',fillOpacity:.65}).addTo(markers);
+      const tooltip = document.createElement('span');
+      tooltip.textContent = [item.city,item.region,item.country].filter(value=>value&&value!=='Unknown').join(', ') + ' · ' + formatCount(Number(item.visits)||0) + ' visits';
+      marker.bindTooltip(tooltip,{direction:'top',opacity:.95});
+      marker.bindPopup(tooltip.cloneNode(true));
     }
-    return String(count);
+    canvas.dataset.locations = String(locations.length);
+    setTimeout(()=>map.invalidateSize({pan:false}),0);
   }
-
-  function normalizeEndpoint(endpoint) {
-    return (endpoint || "").replace(/\/+$/, "");
-  }
-
-  function endpointCandidates(root) {
-    var seen = {};
-    return [
-      root.getAttribute("data-endpoint"),
-      root.getAttribute("data-fallback-endpoint")
-    ]
-      .map(normalizeEndpoint)
-      .filter(function (endpoint) {
-        if (!endpoint || seen[endpoint]) return false;
-        seen[endpoint] = true;
-        return true;
-      });
-  }
-
-  function fetchWithTimeout(url, options, timeoutMs) {
-    var controller = new AbortController();
-    var timer = setTimeout(function () {
-      controller.abort();
-    }, timeoutMs || 6000);
-    var settings = Object.assign({}, options, { signal: controller.signal });
-
-    return fetch(url, settings).finally(function () {
-      clearTimeout(timer);
-    });
-  }
-
-  function loadStylesheet(href) {
-    if (document.querySelector('link[href="' + href + '"]')) return;
-    var link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = href;
-    document.head.appendChild(link);
-  }
-
-  function loadScript(src) {
-    return new Promise(function (resolve, reject) {
-      if (window.L) {
-        resolve();
-        return;
+  async function init() {
+    let summary, snapshot = local;
+    if (!local) {
+      for (const endpoint of endpoints) {
+        try { summary = await request(endpoint+'/summary'); if (Array.isArray(summary.locations)) break; summary = null; } catch {}
       }
-      var timer = setTimeout(function () {
-        reject(new Error("Map library timed out"));
-      }, 6000);
-      var existing = document.querySelector('script[src="' + src + '"]');
-      if (existing) {
-        existing.addEventListener("load", function () {
-          clearTimeout(timer);
-          resolve();
-        });
-        existing.addEventListener("error", function () {
-          clearTimeout(timer);
-          reject(new Error("Map library unavailable"));
-        });
-        return;
-      }
-      var script = document.createElement("script");
-      script.src = src;
-      script.async = true;
-      script.onload = function () {
-        clearTimeout(timer);
-        resolve();
-      };
-      script.onerror = function () {
-        clearTimeout(timer);
-        reject(new Error("Map library unavailable"));
-      };
-      document.head.appendChild(script);
-    });
-  }
-
-  function markerRadius(visits) {
-    var count = Math.max(1, Number(visits) || 1);
-    // Log scaling keeps low-count cities from swelling on a world-scale map.
-    return Math.max(3.2, Math.min(10, 3.1 + Math.log10(count + 1) * 1.15));
-  }
-
-  function hideWidget() {
-    var root = document.getElementById("visitor-map");
-    if (!root) return;
-    root.hidden = true;
-    root.setAttribute("aria-hidden", "true");
-    root.style.display = "none";
-    root.style.visibility = "";
-  }
-
-  function prepareWidgetForMap() {
-    var root = document.getElementById("visitor-map");
-    if (!root) return;
-    root.hidden = false;
-    root.setAttribute("aria-hidden", "true");
-    root.style.display = "";
-    root.style.visibility = "hidden";
-  }
-
-  function showWidget() {
-    var root = document.getElementById("visitor-map");
-    if (!root) return;
-    root.hidden = false;
-    root.removeAttribute("aria-hidden");
-    root.style.display = "";
-    root.style.visibility = "";
-  }
-
-  function renderMap(locations) {
-    var canvas = document.getElementById("visitor-map-canvas");
-    if (!canvas || !locations.length) {
-      hideWidget();
-      return Promise.reject(new Error("No visitor locations available"));
     }
-
-    var worldView = {
-      center: [12, 0],
-      zoom: 0.5
-    };
-
-    canvas.innerHTML = "";
-    canvas.style.display = "";
-
-    loadStylesheet("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css");
-    return loadScript("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js")
-      .then(function () {
-        prepareWidgetForMap();
-        var map = L.map(canvas, {
-          attributionControl: true,
-          scrollWheelZoom: false,
-          dragging: window.innerWidth > 640,
-          tap: false,
-          zoomControl: true,
-          zoomSnap: 0.25,
-          zoomDelta: 0.5,
-          minZoom: 0
-        }).setView(worldView.center, worldView.zoom);
-
-        var revealTimer = setTimeout(function () {
-          map.remove();
-          hideWidget();
-        }, 7000);
-        var tileFailed = false;
-        var tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          minZoom: 0,
-          maxZoom: 6,
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        });
-
-        tileLayer.on("tileerror", function () {
-          tileFailed = true;
-        });
-
-        tileLayer.once("load", function () {
-          clearTimeout(revealTimer);
-          if (tileFailed) {
-            map.remove();
-            hideWidget();
-            return;
-          }
-          showWidget();
-          map.invalidateSize();
-        });
-        tileLayer.addTo(map);
-
-        locations.forEach(function (item) {
-          var lat = Number(item.latitude);
-          var lon = Number(item.longitude);
-          if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
-
-          var radius = markerRadius(item.visits);
-          var marker = L.circleMarker([lat, lon], {
-            radius: radius,
-            color: "#27496d",
-            weight: 1.25,
-            fillColor: "#9b2f3f",
-            fillOpacity: 0.62
-          }).addTo(map);
-
-          var place = [item.city, item.region, item.country].filter(Boolean).join(", ");
-          marker.bindTooltip(place + " - " + formatCount(item.visits) + " visits", {
-            direction: "top",
-            opacity: 0.92
-          });
-        });
-
-        map.setView(worldView.center, worldView.zoom);
-        setTimeout(function () {
-          map.invalidateSize();
-        }, 0);
-      })
-      .catch(function () {
-        canvas.innerHTML = "";
-        canvas.style.display = "none";
-        hideWidget();
-      });
-  }
-
-  function updateWidget(summary, baseline) {
-    var totalEl = document.getElementById("visitor-map-total");
-    var locations = Array.isArray(summary.locations) ? summary.locations : [];
-    var total = Number(summary.totalVisits);
-
-    if (!Number.isFinite(total)) {
-      total = baseline + (Number(summary.recordedVisits) || 0);
+    if (!summary) {
+      try { summary = await request(root.dataset.snapshot); snapshot = true; } catch {}
     }
-
-    if (totalEl) totalEl.textContent = formatCount(total);
-    return renderMap(locations);
+    if (!summary) { drawMap([]); status.textContent = 'Visitor data is temporarily unavailable. Please try again later.'; return; }
+    const total = Number.isFinite(Number(summary.totalVisits)) && summary.totalVisits !== null ? Number(summary.totalVisits) : baseline + (Number(summary.recordedVisits)||0);
+    totalElement.textContent = formatCount(total);
+    totalElement.title = total.toLocaleString('en-US') + ' cumulative visits';
+    const locations = Array.isArray(summary.locations) ? summary.locations : [];
+    const updated = summary.fetchedAt ? new Date(summary.fetchedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '';
+    status.textContent = snapshot ? `${locations.length} locations · ${local ? 'Preview snapshot' : 'Last available data'}${updated ? ' · '+updated : ''}` : `${locations.length} locations around the world`;
+    drawMap(locations);
   }
-
-  function collectAndLoadSummary(endpoint, path) {
-    fetchWithTimeout(endpoint + "/collect?path=" + path, {
-      method: "GET",
-      mode: "cors",
-      credentials: "omit",
-      keepalive: true
-    }, 5000)
-      .catch(function () {
-        return null;
-      });
-
-    return fetchWithTimeout(endpoint + "/summary", {
-      method: "GET",
-      mode: "cors",
-      credentials: "omit"
-    }, 6000)
-      .then(function (response) {
-        if (!response || !response.ok) throw new Error("Visitor summary unavailable");
-        return response.json();
-      });
-  }
-
-  function loadFromEndpoints(endpoints, path, index) {
-    if (index >= endpoints.length) {
-      return Promise.reject(new Error("All visitor endpoints unavailable"));
-    }
-
-    return collectAndLoadSummary(endpoints[index], path).catch(function () {
-      return loadFromEndpoints(endpoints, path, index + 1);
-    });
-  }
-
-  function initVisitorMap() {
-    var root = document.getElementById("visitor-map");
-    if (!root) return;
-
-    var endpoints = endpointCandidates(root);
-    var baseline = Number(root.getAttribute("data-baseline")) || 1000000;
-    var totalEl = document.getElementById("visitor-map-total");
-    if (totalEl) totalEl.textContent = formatCount(baseline);
-    hideWidget();
-
-    if (!endpoints.length) {
-      return;
-    }
-
-    var path = encodeURIComponent(window.location.pathname || "/");
-    loadFromEndpoints(endpoints, path, 0)
-      .then(function (summary) {
-        return updateWidget(summary, baseline);
-      })
-      .catch(function () {
-        hideWidget();
-      });
-  }
-
-  document.addEventListener("DOMContentLoaded", initVisitorMap);
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();init();}},{rootMargin:'300px'});
+    observer.observe(root);
+  } else init();
 })();

@@ -1,33 +1,31 @@
-# Boyi Fu Personal Website
+# Boyi Fu — Academic Website
 
-This repository contains the source code for Boyi Fu's personal academic website:
+Personal academic website: https://boyifu-ai.github.io/
 
-https://boyifu-ai.github.io/
+Built with Jekyll and the Folio Academic design. The site includes a bilingual profile, research and publications, news, contact information, and the existing visitor map.
 
-The site is built with Jekyll and GitHub Pages, based on the lightweight Jekyll Now structure, with custom pages for news, biography, research, publications, contact information, and a self-hosted visitor map.
+## Local preview
 
-## Local Preview
+Install Ruby and Bundler, then run:
 
-Install Ruby, Bundler, and the GitHub Pages gem, then run:
-
-```powershell
-cd D:\MyBlog\boyifu-ai.github.io-latest
-jekyll serve --host 127.0.0.1 --port 4000 --livereload
+```sh
+bundle install
+bundle exec jekyll serve
 ```
 
-Open:
+## Content
 
-```text
-http://127.0.0.1:4000/
-```
-
-## Content Notes
-
-- News posts are stored in `_posts`.
-- Earlier hidden long-form blog drafts are stored in `_drafts` and are not published by normal Jekyll builds.
-- The footer visitor map is configured in `_config.yml` under `visitor_map`.
-- The Cloudflare Worker template for city-level visitor telemetry is in `visitor-telemetry-worker`.
+- `index.html`: homepage
+- `AboutMe.md`: English/Chinese profile, education, experience, awards, service
+- `research.html`: research overview and bilingual motto
+- `_data/publications.yml`: publications shared by the homepage and Research
+- `_posts/`: news articles with their existing URLs
+- `Contact.html`: contact information and address
+- `assets/site.css`: responsive styling
+- `images/awesome-boyi.jpg`: portrait
 
 ## Deployment
 
-Push changes to `master`. GitHub Pages will rebuild and publish the site automatically.
+GitHub Pages builds the website from the repository's `master` branch. Local screenshots, build output, logs, and preview tooling are not included in the publication commit.
+
+The visitor map uses the existing Cloudflare service, with a dated snapshot fallback. Optional analytics remain consent-based; localhost previews do not record visits. The `visitor-telemetry-worker` directory retains the existing service source and is excluded from the website build.

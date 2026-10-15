@@ -1,0 +1,49 @@
+- id: lagrange
+  year: 2026
+  title: Three-dimensional narrow volume reconstruction method with unconditional stability based on a phase-field Lagrange multiplier approach
+  authors: 'R. Gao, X. Kong, D. Cai, <strong>B. Fu</strong>, and J. Yang'
+  journal: Computers & Mathematics with Applications
+  volume: '202, 88–112'
+  short: CMA
+  image: /images/lagrange/SCIcoverLagrange.png
+  image_alt: First page of the phase-field Lagrange multiplier reconstruction paper
+  url: https://www.sciencedirect.com/science/article/pii/S0898122125004833
+  story: /Lagrange/
+  note: Unconditionally stable 3D volume reconstruction.
+- id: leapfrog
+  year: 2025
+  title: 'On the numerical approximation of a phase-field volume reconstruction model: Linear and energy-stable leap-frog finite difference scheme'
+  authors: '<strong>B. Fu</strong>, D. Cai, X. Kong, R. Gao, and J. Yang'
+  journal: Communications in Nonlinear Science and Numerical Simulation
+  volume: '151, 109104'
+  short: CNSNS
+  image: /images/leapfrog/SCIcoverCNSNS1.png
+  image_alt: First page of the energy-stable leap-frog reconstruction paper
+  url: https://www.sciencedirect.com/science/article/pii/S1007570425005155
+  story: /leapfrog/
+  code: https://github.com/boyifu-ai/Leapfrog3DR
+  note: A linear, energy-stable scheme for phase-field reconstruction.
+- id: bdf2
+  year: 2025
+  title: Phase-field computation for 3D shell reconstruction with an energy-stable and uniquely solvable BDF2 method
+  authors: 'D. Cai, <strong>B. Fu</strong>, R. Gao, X. Kong, and J. Yang'
+  journal: Computers & Mathematics with Applications
+  volume: '189, 1–23'
+  short: CMA
+  image: /images/3DBDF2Method/SCIcoverCMA1.jpg
+  image_alt: First page of the BDF2 three-dimensional shell reconstruction paper
+  url: https://www.sciencedirect.com/science/article/pii/S0898122125001166
+  story: /3DBDF2Method/
+  note: Energy stability and unique solvability for shell reconstruction.
+- id: auxiliary
+  year: 2025
+  title: Two lower boundedness-preservity auxiliary variable methods for a phase-field model of 3D narrow volume reconstruction
+  authors: 'X. Kong, R. Gao, <strong>B. Fu</strong>, D. Cai, and J. Yang'
+  journal: Communications in Nonlinear Science and Numerical Simulation
+  volume: '143, 108649'
+  short: CNSNS
+  image: /images/TwoLowerBoundednessfor3DReconstruction/SCIcoverCNSNS1.jpg
+  image_alt: First page of the lower boundedness-preserving auxiliary variable reconstruction paper
+  url: https://www.sciencedirect.com/science/article/abs/pii/S1007570425000607
+  story: /TwoLowerBoundednessfor3DReconstruction/
+  note: Lower boundedness-preserving methods for narrow volumes.

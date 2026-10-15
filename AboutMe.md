@@ -1,31 +1,22 @@
 ---
-layout: page
-title: Biograpy 簡介
+layout: about
+title: Biography
+nav: about
 permalink: /AboutMe/
 ---
-
-## <span class="title-underline">Profile  概述</span>
-
-<div class="profile-row">
-  <div class="profile-text">
-    <p>Boyi Fu is now a year-1 M.Phil student majoring in AI at the Hong Kong University of Science and Technology (GZ).</p>
-    <p>付博亦目前是一名香港科技大學（廣州校區）人工智能專業的研一學生。</p>
-    <p>A recent photo of him is shown here:</p>
-    <p>他的生活近照如圖所示：</p>
-  </div>
-  <div class="profile-photo">
-    <img src="{{ site.baseurl }}/images/BoyiFu-lifes.jpg" alt="Boyi Fu" />
-  </div>
+<section id="profile" aria-labelledby="profile-title">
+<div class="profile-heading"><h2 id="profile-title">Profile</h2><div class="language-switch" role="group" aria-label="Profile language" hidden><button type="button" data-language="en" aria-pressed="true" aria-controls="profile-en">English</button><button type="button" data-language="zh" aria-pressed="false" aria-controls="profile-zh" lang="zh-Hant">中文</button></div></div>
+<div id="profile-en" class="profile-panel" data-profile-language="en" lang="en">
+<p>Boyi Fu is a first-year M.Phil. student in Artificial Intelligence at the Hong Kong University of Science and Technology (Guangzhou). Boyi Fu spent the first eighteen years of his life in Wuhan, Hubei Province, China. Through sustained effort during his adolescence, he earned the opportunity to pursue his undergraduate degree in Computer Science at Macau University of Science and Technology. In the Macau S.A.R. of China, he spent four formative years with his peers and gradually developed a strong interest in scientific research. During his undergraduate studies, he was deeply grateful for the generous academic guidance and support he received from <a href="https://cfdyang521.github.io/">Professor Junxiang Yang</a> in the fields of three-dimensional geometry and computer graphics. While studying at Macau University of Science and Technology, he was awarded the Fundação Macau Special Award Scholarship for Outstanding Students in Higher Education Institutions. He also received the Honors Graduation Cord and was consecutively recognized as a "Dean’s Honor List Student" for three years. In his sophomore year, he was selected to participate in a summer research at The Chinese University of Hong Kong, where he had the privilege of working under the supervision of <a href="https://www.zihankan.com/">Professor Zihan Kan</a>. In his junior year, under the guidance of <a href="https://fie.must.edu.mo/id-1444/person/view/id-11446.html">Dean Zhanchuan Cai</a> of the Faculty of Innovation Engineering, he won a National Award in the Contemporary Undergraduate Mathematical Contest in Modeling. During the same period, under the joint supervision of <a href="https://fie.must.edu.mo/id-848/person/view/id-446.html?locale=en_US">Professor Yan Qiao</a> and <a href="https://fie.must.edu.mo/id-848/person/view/id-422.html?locale=en_US">Professor Siwei Zhang</a>, he received both provincial-level and national-level awards in the China College Students Mechanical Engineering Innovation and Creativity Competition. Ultimately, he graduated from his alma mater with First-Class Honors.</p>
 </div>
-
-<div class="profile-biography">
-  <p>Boyi Fu spent the first eighteen years of his life in Wuhan, Hubei Province, China. Through sustained effort during his adolescence, he earned the opportunity to pursue his undergraduate degree in Computer Science at Macau University of Science and Technology. In the Macau S.A.R. of China, he spent four formative years with his peers and gradually developed a strong interest in scientific research. During his undergraduate studies, he was deeply grateful for the generous academic guidance and support he received from <a href="https://cfdyang521.github.io/">Professor Junxiang Yang</a> in the fields of three-dimensional geometry and computer graphics. While studying at Macau University of Science and Technology, he was awarded the Fundação Macau Special Award Scholarship for Outstanding Students in Higher Education Institutions. He also received the Honors Graduation Cord and was consecutively recognized as a "Dean’s Honor List Student" for three years. In his sophomore year, he was selected to participate in a summer research at The Chinese University of Hong Kong, where he had the privilege of working under the supervision of <a href="https://www.zihankan.com/">Professor Zihan Kan</a>. In his junior year, under the guidance of <a href="https://fie.must.edu.mo/id-1444/person/view/id-11446.html">Dean Zhanchuan Cai</a> of the Faculty of Innovation Engineering, he won a National Award in the Contemporary Undergraduate Mathematical Contest in Modeling. During the same period, under the joint supervision of <a href="https://fie.must.edu.mo/id-848/person/view/id-446.html?locale=en_US">Professor Yan Qiao</a> and <a href="https://fie.must.edu.mo/id-848/person/view/id-422.html?locale=en_US">Professor Siwei Zhang</a>, he received both provincial-level and national-level awards in the China College Students Mechanical Engineering Innovation and Creativity Competition. Ultimately, he graduated from his alma mater with First-Class Honors.</p>
-  <p>付博亦在中國湖北省武漢市度過了人生的前十八個春秋，他在青少年時期付出的努力爲他爭取到赴澳門科技大學本科深造計算機科學專業的機會。在中國澳門特別行政區，他和他的朋友們度過了人生最寶貴的四個春秋並逐步培養了他的科研興趣。他深深感激在本科期間有幸得到了<a href="https://cfdyang521.github.io/">楊俊翔教授</a>在三維幾何與計算機圖形學領域慷慨無私的科研指導與幫助。在澳門科技大學學習期間，他曾榮獲澳門特別行政區澳門基金會澳門高等院校優秀學生特別獎學金，他得到了本科生榮譽畢業穗帶的榮譽並獲得了連續三年「院長優秀生」的殊榮。在大學二年級，他得到了赴香港中文大學參與暑期研究的機會，在那裏，他有幸得到了<a href="https://www.zihankan.com/">阚子涵教授</a>的指導。在大學三年級，他有幸在創新工程學院<a href="https://fie.must.edu.mo/id-1444/person/view/id-11446.html">蔡占川院長</a>的指導下贏得全國大學生數學建模競賽的國獎。於同一時期，他也有幸在<a href="https://fie.must.edu.mo/id-848/person/view/id-446.html?locale=en_US">喬岩教授</a>和<a href="https://fie.must.edu.mo/id-848/person/view/id-422.html?locale=en_US">張思維教授</a>的聯合指導下贏得中國大學生機械工程創新創業大賽的省獎與國獎。最終，他以甲等榮譽從他的母校畢業。</p>
+<div id="profile-zh" class="profile-panel" data-profile-language="zh" lang="zh-Hant">
+<p>付博亦目前是香港科技大學（廣州）人工智能專業的研一學生。付博亦在中國湖北省武漢市度過了人生的前十八個春秋，他在青少年時期付出的努力爲他爭取到赴澳門科技大學本科深造計算機科學專業的機會。在中國澳門特別行政區，他和他的朋友們度過了人生最寶貴的四個春秋並逐步培養了他的科研興趣。他深深感激在本科期間有幸得到了<a href="https://cfdyang521.github.io/">楊俊翔教授</a>在三維幾何與計算機圖形學領域慷慨無私的科研指導與幫助。在澳門科技大學學習期間，他曾榮獲澳門特別行政區澳門基金會澳門高等院校優秀學生特別獎學金，他得到了本科生榮譽畢業穗帶的榮譽並獲得了連續三年「院長優秀生」的殊榮。在大學二年級，他得到了赴香港中文大學參與暑期研究的機會，在那裏，他有幸得到了<a href="https://www.zihankan.com/">阚子涵教授</a>的指導。在大學三年級，他有幸在創新工程學院<a href="https://fie.must.edu.mo/id-1444/person/view/id-11446.html">蔡占川院長</a>的指導下贏得全國大學生數學建模競賽的國獎。於同一時期，他也有幸在<a href="https://fie.must.edu.mo/id-848/person/view/id-446.html?locale=en_US">喬岩教授</a>和<a href="https://fie.must.edu.mo/id-848/person/view/id-422.html?locale=en_US">張思維教授</a>的聯合指導下贏得中國大學生機械工程創新創業大賽的省獎與國獎。最終，他以甲等榮譽從他的母校畢業。</p>
 </div>
+</section>
 
 ---
 
-## <span class="title-underline">Education 教育</span>
+<h2 id="education">Education</h2>
 
 <div class="education-item">
   <div class="education-logo">
@@ -33,8 +24,8 @@ permalink: /AboutMe/
   </div>
   <div class="education-content">
     <h3>M.Phil in Artificial Intelligence <span class="education-funding">(with Full Scholarship)</span></h3>
-    <p><strong><a href="https://www.hkust-gz.edu.cn/">The Hong Kong University of Science and Technology</a></strong> <strong>(THE ranking Top 50)</strong></p>
-    <p><strong>Duration:</strong> September 2026 - October 2028</p>
+    <p><strong><a href="https://www.hkust-gz.edu.cn/">The Hong Kong University of Science and Technology (Guangzhou)</a></strong></p>
+    <p><strong>Duration:</strong> September 2026 – October 2028 (expected)</p>
     <p class="education-honors-title"><strong>Selected Honors and Awards:</strong></p>
     <ul>
       <li>Red Bird Postgraduate Studentships (PGS).</li>
@@ -49,7 +40,7 @@ permalink: /AboutMe/
   </div>
   <div class="education-content">
     <h3>B.Sc in Computer Science</h3>
-    <p><strong><a href="https://www.must.edu.mo/index.html?locale=en_US">Macau University of Science and Technology</a></strong> <strong>(THE ranking Top 300)</strong></p>
+    <p><strong><a href="https://www.must.edu.mo/index.html?locale=en_US">Macau University of Science and Technology</a></strong></p>
     <p><strong>Cumulative Grade Point Average (cGPA):</strong> 3.81 / 4.00 (Ranked Top 1%)</p>
     <p><strong>Duration:</strong> September 2022 - July 2026</p>
     <p><strong>Supervisor:</strong> <a href="https://cfdyang521.github.io/">Prof. Junxiang Yang</a></p>
@@ -71,7 +62,7 @@ permalink: /AboutMe/
   </div>
   <div class="education-content">
     <h3>Summer Research</h3>
-    <p><strong><a href="https://www.cuhk.edu.hk/english/index.html">The Chinese University of Hong Kong</a></strong><strong> (THE ranking Top 50)</strong></p>
+    <p><strong><a href="https://www.cuhk.edu.hk/english/index.html">The Chinese University of Hong Kong</a></strong></p>
     <p><strong>Track:</strong> Big Data Analysis and Application</p>
     <p><strong>Duration:</strong> July 2024 - August 2024</p>
     <p><strong>Supervisor:</strong> <a href="https://www.zihankan.com/">Professor Zihan Kan</a></p>
@@ -81,7 +72,7 @@ permalink: /AboutMe/
 
 ---
 
-## <span class="title-underline">Internship 實習</span>
+<h2 id="experience">Experience</h2>
 
 <div class="education-item experience-item">
   <div class="education-logo experience-logo">
@@ -105,7 +96,7 @@ permalink: /AboutMe/
 
 ---
 
-## <span class="title-underline">National Prizes 國家級獎項</span>
+<h2 id="awards">Selected awards</h2>
 
 <div class="education-item experience-item">
   <div class="education-logo experience-logo">
@@ -133,7 +124,7 @@ permalink: /AboutMe/
   <div class="education-content">
     <h3>China College Students Mechanical Engineering <br>
     Innovation and Creativity Competition (MEICC)</h3>
-    <p><strong>National Second Prize & Provincial First Prize (Guangdong–Hong Kong–Macao Area)</strong></p>
+    <p><strong>National Second Prize &amp; Provincial First Prize (Guangdong–Hong Kong–Macao Area)</strong></p>
     <p><strong>Supervisors:</strong> <a href="https://fie.must.edu.mo/id-848/person/view/id-446.html?locale=en_US">Prof. Yan Qiao</a> and <a href="https://fie.must.edu.mo/id-848/person/view/id-422.html?locale=en_US">Prof. Siwei Zhang</a></p>
     <p><strong>Role:</strong> Team Leader</p>
     <p class="education-honors-title"><strong>Duty:</strong></p>
@@ -163,7 +154,7 @@ permalink: /AboutMe/
 
 ---
 
-## <span class="title-underline">Services 服務</span>
+<h2 id="service">Academic service</h2>
 
 <div class="service-grid">
   <article class="service-card service-card-ieee">

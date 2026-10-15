@@ -22,6 +22,6 @@ Lately, Boyi Fu is honored to participate in the establishment of the inaugural 
 
  <p style="text-align: center;">
             <img src="{{ site.baseurl }}/images/IEEE/logo.png" alt="logo" width="600"><br/>
-            Fig. The organization we established.
+            Fig. The IEEE Computer Society Macau Chapter Establishment Ceremony.
             </p>
 Currently, Boyi Fu serves as a cabinet member of IEEE MUST and an advisory ambassador for Hong Kong Engineers (HKIE) at Macau University of Science and Technology.

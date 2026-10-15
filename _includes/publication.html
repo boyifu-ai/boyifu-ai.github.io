@@ -1,0 +1,13 @@
+<article class="publication" id="{{ paper.id }}">
+  <a class="publication-figure publication-figure--paper" href="{{ paper.story | relative_url }}" tabindex="-1" aria-hidden="true">
+    <img src="{{ paper.image | relative_url }}" alt="{{ paper.image_alt }}" loading="lazy" width="840" height="1150">
+    <span>{{ paper.short }} · {{ paper.year }}</span>
+  </a>
+  <div class="publication-body">
+    <div class="publication-meta">{{ paper.year }}</div>
+    <h3><a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">{{ paper.title }}</a></h3>
+    <p class="authors">{{ paper.authors }}</p>
+    <p class="journal"><em>{{ paper.journal }}</em>, {{ paper.volume }}.</p>
+    <div class="publication-links"><a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">Paper <span aria-hidden="true">↗</span></a>{% if paper.code %}<a href="{{ paper.code }}" target="_blank" rel="noopener noreferrer">Code <span aria-hidden="true">↗</span></a>{% endif %}<a href="{{ paper.story | relative_url }}">Research note <span aria-hidden="true">→</span></a></div>
+  </div>
+</article>

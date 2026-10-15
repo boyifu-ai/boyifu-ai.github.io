@@ -1,134 +1,56 @@
-<!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
-
-    {% if page.url == "/" or page.path == "index.html" %}
-      {% assign seo_title = site.seo_title %}
-    {% elsif page.title %}
-      {% assign seo_title = page.title | append: " | " | append: site.seo_title %}
-    {% else %}
-      {% assign seo_title = site.seo_title %}
-    {% endif %}
-    <title>{{ seo_title }}</title>
-    {% include meta.html %}
-
-    <!-- MathJax (LaTeX) -->
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-    <!-- Site styles -->
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.seo_title }}" href="{{ site.baseurl }}/feed.xml" />
-
-    <!-- Icons for Back-to-top button -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YE7VVPT8CQ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YE7VVPT8CQ');
-    </script>
-
-    <!-- Site scripts (defer: avoid blocking render) -->
-    <script src="{{ site.baseurl }}/script.js" defer></script>
-    <script src="{{ site.baseurl }}/visitor-map.js?v={{ site.time | date: '%s' }}" defer></script>
-  </head>
-
-  <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" alt="{{ site.name }}"/></a>
-
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
-          </div>
-
-          <nav class="site-nav" aria-label="Primary">
-            <a class="site-nav-link" href="{{ site.baseurl }}/">News</a>
-            <a class="site-nav-link" href="{{ site.baseurl }}/AboutMe">About Me</a>
-            <a class="site-nav-link" href="{{ site.baseurl }}/research">Research</a>
-            <a class="site-nav-link" href="{{ site.baseurl }}/Contact">Contact</a>
-            <button
-              id="menu-toggle"
-              class="menu-icon"
-              type="button"
-              aria-expanded="false"
-              aria-controls="menu"
-              aria-label="Open main menu"
-            >
-              <span class="menu-icon-bar"></span>
-              <span class="menu-icon-bar"></span>
-              <span class="menu-icon-bar"></span>
-            </button>
-            <div class="menu" id="menu" aria-label="Mobile navigation">
-              <a class="menu-link" href="{{ site.baseurl }}/">News</a>
-              <a class="menu-link" href="{{ site.baseurl }}/AboutMe">About Me</a>
-              <a class="menu-link" href="{{ site.baseurl }}/research">Research</a>
-              <a class="menu-link" href="{{ site.baseurl }}/Contact">Contact</a>
-            </div>
-          </nav>
-        </header>
-      </div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f9f9f6">
+  {% assign display_title = page.title | default: site.name %}
+  <title>{{ display_title | escape }}{% if page.title %} · Boyi Fu{% endif %}</title>
+  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ display_title | escape }}">
+  <meta property="og:description" content="{{ page.description | default: site.description | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ '/images/awesome-boyi.jpg' | absolute_url }}">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+  <script src="{{ '/assets/site.js' | relative_url }}" defer></script>
+  <link rel="stylesheet" href="{{ '/assets/vendor/leaflet/leaflet.css' | relative_url }}">
+  <script src="{{ '/assets/vendor/leaflet/leaflet.js' | relative_url }}" defer></script>
+  <script src="{{ '/visitor-map.js' | relative_url }}" defer></script>
+  {% if page.math %}
+  <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  {% endif %}
+</head>
+<body data-baseurl="{{ site.baseurl }}"{% if jekyll.environment == 'production' %} data-analytics="{{ site.analytics_id }}"{% endif %}>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="Boyi Fu, home"><span class="monogram" aria-hidden="true">bf.</span><span>Boyi Fu <span class="wordmark-cn" lang="zh-Hant">付博亦</span></span></a>
+      <button class="menu-toggle" type="button" aria-controls="navigation" aria-expanded="false"><span>Menu</span><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 6h14M3 13h14" stroke="currentColor" stroke-width="1.5"/></svg></button>
+      <nav id="navigation" class="navigation" aria-label="Main navigation">
+        <a href="{{ '/' | relative_url }}"{% if page.nav == 'home' %} aria-current="page"{% endif %}>Home</a>
+        <a href="{{ '/research/' | relative_url }}"{% if page.nav == 'research' %} aria-current="page"{% endif %}>Research</a>
+        <a href="{{ '/AboutMe/' | relative_url }}"{% if page.nav == 'about' %} aria-current="page"{% endif %}>About</a>
+        <a href="{{ '/news/' | relative_url }}"{% if page.nav == 'news' %} aria-current="page"{% endif %}>News</a>
+        <a href="{{ '/Contact/' | relative_url }}"{% if page.nav == 'contact' %} aria-current="page"{% endif %}>Contact <span aria-hidden="true">↗</span></a>
+      </nav>
     </div>
-
-    <main id="main" role="main" class="container">
-      {{ content }}
-    </main>
-
-    <button onclick="topFunction()" id="backToTop" aria-label="Back to top">
-      <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          {% include svg-icons.html %}
-          <hr>
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <div class="site-footer-links">
-            <section
-              class="visitor-map"
-              id="visitor-map"
-              data-endpoint="{{ site.visitor_map.api_url }}"
-              data-fallback-endpoint="{{ site.visitor_map.fallback_api_url }}"
-              data-baseline="{{ site.visitor_map.baseline_visits }}"
-              aria-labelledby="visitor-map-title"
-              aria-hidden="true"
-              style="display: none;"
-              hidden
-            >
-              <div class="visitor-map-head">
-                <h2 id="visitor-map-title">Global Visitor Map</h2>
-              </div>
-              <div
-                class="visitor-map-canvas"
-                id="visitor-map-canvas"
-                role="img"
-                aria-label="World map of aggregated visitor cities"
-              >
-                <div class="visitor-map-empty">Connect the telemetry endpoint to render live city markers.</div>
-              </div>
-              <div class="visitor-map-stats">
-                <p><span id="visitor-map-total">1M+</span><span> cumulative visits since 2024</span></p>
-              </div>
-            </section>
-            <p>
-              <a href="{{ site.baseurl }}/FTC">FTC 免責聲明</a>
-              <a href="{{ site.baseurl }}/privacy">Privacy-Policy 隱私權政策</a>
-            </p>
-            <p>©Copyright 2024-2030 Boyi-Fu. All Rights Reserved.</p>
-          </div>
-        </footer>
-      </div>
-    </div>
-
-    {% include analytics.html %}
-  </body>
+  </header>
+  <main id="main" class="shell" tabindex="-1">{{ content }}</main>
+  <footer class="site-footer shell">
+    <section id="visitor-map" class="visitor-map" data-endpoint="{{ site.visitor_map.api_url }}" data-fallback-endpoint="{{ site.visitor_map.fallback_api_url }}" data-baseline="{{ site.visitor_map.baseline_visits }}" data-snapshot="{{ '/assets/visitor-snapshot.json' | relative_url }}" data-mode="{{ jekyll.environment }}" aria-labelledby="visitor-map-title">
+      <h2 id="visitor-map-title">Global visitor map</h2><div id="visitor-map-canvas" class="visitor-map-canvas" aria-label="Interactive map of aggregated visitor locations"></div><p class="visitor-map-count"><strong id="visitor-map-total">{{ site.visitor_map.baseline_visits | divided_by: 1000000 }}M+</strong> cumulative visits since 2024</p><p id="visitor-map-status" class="visitor-map-status" role="status">Loading visitor locations…</p><noscript><p>Enable JavaScript to explore the visitor map.</p></noscript>
+    </section>
+    <div class="footer-top"><a class="footer-name" href="{{ '/' | relative_url }}">Boyi Fu <span lang="zh-Hant">付博亦</span></a><a href="#" class="back-top">Back to top ↑</a></div>
+    <div class="footer-bottom"><span>© 2026 - 2030 Boyi Fu. All Rights Reserved.</span><div><a href="{{ '/privacy/' | relative_url }}">Privacy</a><a href="{{ '/FTC/' | relative_url }}">Disclaimer</a>{% if jekyll.environment == 'production' %}<button type="button" class="text-button" data-cookie-settings>Cookie settings</button>{% endif %}</div></div>
+  </footer>
+  {% if jekyll.environment == 'production' %}
+  <aside class="cookie-banner" hidden aria-label="Optional analytics"><p>Allow optional analytics to help understand website visits? <a href="{{ '/privacy/' | relative_url }}">Privacy policy</a></p><div><button type="button" class="button" data-consent="denied">Essential only</button><button type="button" class="button button-primary" data-consent="granted">Allow analytics</button></div></aside>
+  {% endif %}
+  <p class="toast" role="status" aria-live="polite" hidden></p>
+</body>
 </html>
