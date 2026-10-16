@@ -71,14 +71,19 @@
 .about-content .service-content h3,.about-content .service-award-content h3{font-size:16px}
 .about-content .service-content p,.about-content .service-award-content p,.about-content .service-award-content div{font-size:14px;line-height:1.9}
 @media(max-width:540px){.about-content>h2{font-size:29px}.about-content .education-content h3{font-size:17px}}
+.site-footer{text-align:center}
+.site-footer .visitor-map{margin-inline:auto}
+.footer-bottom{display:flex;flex-direction:column;align-items:center;gap:10px;font-size:11px}
+.footer-bottom>div{justify-content:center;align-items:center;gap:8px 20px;margin-top:0}
+.footer-bottom a,.footer-bottom .text-button{display:inline-flex;align-items:center;min-height:44px;font-size:11px}
+@media(min-width:761px){
+  .footer-top{display:grid;grid-template-columns:1fr auto 1fr}
+  .footer-top .footer-name{grid-column:2}
+  .footer-top .back-top{grid-column:3;justify-self:end}
+}
 @media(max-width:760px){
-  .site-footer{text-align:center}
-  .site-footer .visitor-map{margin-inline:auto}
   .footer-top{flex-direction:column;align-items:center;gap:8px}
   .footer-top .back-top{margin-left:0;min-height:44px;display:inline-flex;align-items:center;font-size:12px}
-  .footer-bottom{display:flex;flex-direction:column;align-items:center;gap:10px;font-size:11px}
-  .footer-bottom>div{justify-content:center;align-items:center;gap:8px 20px;margin-top:0}
-  .footer-bottom a,.footer-bottom .text-button{display:inline-flex;align-items:center;min-height:44px;font-size:11px}
   .search-field input{font-size:16px}
   .menu-toggle,.navigation>a,.language-switch button,.filter,.pagination button{min-height:44px}
 }
