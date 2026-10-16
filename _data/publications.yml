@@ -1,4 +1,5 @@
 - id: lagrange
+  quartile: JCR Q1
   year: 2026
   title: Three-dimensional narrow volume reconstruction method with unconditional stability based on a phase-field Lagrange multiplier approach
   authors: 'R. Gao, X. Kong, D. Cai, <strong>B. Fu</strong>, and J. Yang'
@@ -11,6 +12,7 @@
   story: /Lagrange/
   note: Unconditionally stable 3D volume reconstruction.
 - id: leapfrog
+  quartile: JCR Q1
   year: 2025
   title: 'On the numerical approximation of a phase-field volume reconstruction model: Linear and energy-stable leap-frog finite difference scheme'
   authors: '<strong>B. Fu</strong>, D. Cai, X. Kong, R. Gao, and J. Yang'
@@ -24,6 +26,7 @@
   code: https://github.com/boyifu-ai/Leapfrog3DR
   note: A linear, energy-stable scheme for phase-field reconstruction.
 - id: bdf2
+  quartile: JCR Q1
   year: 2025
   title: Phase-field computation for 3D shell reconstruction with an energy-stable and uniquely solvable BDF2 method
   authors: 'D. Cai, <strong>B. Fu</strong>, R. Gao, X. Kong, and J. Yang'
@@ -36,6 +39,7 @@
   story: /3DBDF2Method/
   note: Energy stability and unique solvability for shell reconstruction.
 - id: auxiliary
+  quartile: JCR Q1
   year: 2025
   title: Two lower boundedness-preservity auxiliary variable methods for a phase-field model of 3D narrow volume reconstruction
   authors: 'X. Kong, R. Gao, <strong>B. Fu</strong>, D. Cai, and J. Yang'

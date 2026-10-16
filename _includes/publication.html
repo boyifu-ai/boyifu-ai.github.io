@@ -4,7 +4,7 @@
     <span>{{ paper.short }} · {{ paper.year }}</span>
   </a>
   <div class="publication-body">
-    <div class="publication-meta">{{ paper.year }}</div>
+    <div class="publication-meta">{{ paper.year }}{% if paper.quartile %}<span>{{ paper.quartile }}</span>{% endif %}</div>
     <h3><a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">{{ paper.title }}</a></h3>
     <p class="authors">{{ paper.authors }}</p>
     <p class="journal"><em>{{ paper.journal }}</em>, {{ paper.volume }}.</p>
