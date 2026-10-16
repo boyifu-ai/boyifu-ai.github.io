@@ -120,7 +120,7 @@
     }
     const stored = readPreference('boyifu-analytics');
     if (stored === 'granted') startAnalytics();
-    else if (stored !== 'denied' && !localPreview) banner.hidden = false;
+    // Analytics preferences open only when the visitor selects Cookie settings.
     document.querySelectorAll('[data-cookie-settings]').forEach(button => button.addEventListener('click', () => { banner.hidden = false; banner.querySelector('button').focus(); }));
     document.querySelectorAll('[data-consent]').forEach(button => button.addEventListener('click', () => {
       const value = button.dataset.consent; savePreference('boyifu-analytics', value); banner.hidden = true;

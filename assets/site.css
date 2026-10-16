@@ -27,11 +27,14 @@
 .portrait figcaption{font-size:12px;line-height:1.75}
 .company-name{white-space:nowrap;font-weight:700;color:var(--external-link)}
 @media(max-width:540px){
-  .hero .portrait{display:contents;pointer-events:auto}
-  .hero .portrait img{grid-column:1;grid-row:2;justify-self:end;align-self:center}
-  .hero .portrait figcaption{grid-column:1;grid-row:3;margin:0;max-width:100%;font-size:13px;line-height:1.8}
-  .hero-intro{grid-row:4}
-  .hero-links{grid-row:5}
+  .hero{display:flex;flex-direction:column;align-items:stretch;gap:24px}
+  .hero .eyebrow{order:0;justify-content:center}
+  .hero h1{order:1;min-height:0;padding:0;text-align:center;font-size:56px}
+  .hero .portrait{order:2;display:block;width:min(100%,320px);align-self:center;margin:0;pointer-events:auto}
+  .hero .portrait img{display:block;width:160px;height:192px;margin-inline:auto}
+  .hero .portrait figcaption{display:block;margin:12px auto 0;max-width:100%;font-size:13px;line-height:1.8;text-align:center;text-align-last:auto}
+  .hero-intro{order:3}
+  .hero-links{order:4;justify-content:center}
 }
 .section-heading h2{margin-top:0}
 .publication-figure--paper{height:230px;padding:12px 10px 28px}
@@ -68,5 +71,16 @@
 .about-content .service-content h3,.about-content .service-award-content h3{font-size:16px}
 .about-content .service-content p,.about-content .service-award-content p,.about-content .service-award-content div{font-size:14px;line-height:1.9}
 @media(max-width:540px){.about-content>h2{font-size:29px}.about-content .education-content h3{font-size:17px}}
+@media(max-width:760px){
+  .site-footer{text-align:center}
+  .site-footer .visitor-map{margin-inline:auto}
+  .footer-top{flex-direction:column;align-items:center;gap:8px}
+  .footer-top .back-top{margin-left:0;min-height:44px;display:inline-flex;align-items:center;font-size:12px}
+  .footer-bottom{display:flex;flex-direction:column;align-items:center;gap:10px;font-size:11px}
+  .footer-bottom>div{justify-content:center;align-items:center;gap:8px 20px;margin-top:0}
+  .footer-bottom a,.footer-bottom .text-button{display:inline-flex;align-items:center;min-height:44px;font-size:11px}
+  .search-field input{font-size:16px}
+  .menu-toggle,.navigation>a,.language-switch button,.filter,.pagination button{min-height:44px}
+}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 @media print{.navigation,.menu-toggle,.site-footer,.cookie-banner,.hero-links,.about-toc,.language-switch,.copy-email,.post-navigation{display:none!important}.shell{width:100%}body{background:white;color:black;font-size:11pt}.hero{padding:20px 0}.publication,.education-item{break-inside:avoid}.page-heading{padding-top:20px}.about-page{display:block}a{color:inherit}}
