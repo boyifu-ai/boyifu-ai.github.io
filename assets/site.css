@@ -37,6 +37,8 @@
   .hero-links{order:4;justify-content:center}
 }
 .section-heading h2{margin-top:0}
+/* The original teapot GIF has a #f0f0f0 surround; match the white gallery. */
+.reconstruction-gallery .teapot-demo img,.reconstruction-gallery .teapot-demo canvas{filter:brightness(1.065)}
 .publication-figure--paper{height:230px;padding:12px 10px 28px}
 .publication-figure--paper img{width:auto;height:190px;max-width:100%;object-fit:contain}
 @media(max-width:540px){.publication-figure--paper{height:260px}.publication-figure--paper img{height:220px}}
