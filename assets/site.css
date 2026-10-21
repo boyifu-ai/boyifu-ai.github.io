@@ -91,3 +91,7 @@
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 @media print{.navigation,.menu-toggle,.site-footer,.cookie-banner,.hero-links,.about-toc,.language-switch,.copy-email,.post-navigation{display:none!important}.shell{width:100%}body{background:white;color:black;font-size:11pt}.hero{padding:20px 0}.publication,.education-item{break-inside:avoid}.page-heading{padding-top:20px}.about-page{display:block}a{color:inherit}}
+
+.visitor-map .visitor-map-legend{font-size:10px;line-height:1.7;margin-top:10px}.visitor-map-key{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:3px}.visitor-map-key--recorded{background:#9b2f3f}.visitor-map-key--simulated{background:#77b6dd}
+
+.visitor-map .leaflet-control-layers-toggle{background-image:none;width:44px;height:44px;display:grid;place-items:center}.visitor-map .leaflet-control-layers-toggle::before{content:"☷";font-size:27px;line-height:1}

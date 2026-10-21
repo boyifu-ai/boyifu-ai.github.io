@@ -1,0 +1,286 @@
+{
+  "kind": "simulated",
+  "description": "Random display values, not measured visitors. Excluded from actual totals.",
+  "locations": [
+    {
+      "city": "Beijing",
+      "country": "CN",
+      "latitude": 39.9,
+      "longitude": 116.4,
+      "visits": 288
+    },
+    {
+      "city": "Shanghai",
+      "country": "CN",
+      "latitude": 31.23,
+      "longitude": 121.47,
+      "visits": 200
+    },
+    {
+      "city": "Guangzhou",
+      "country": "CN",
+      "latitude": 23.13,
+      "longitude": 113.26,
+      "visits": 200
+    },
+    {
+      "city": "Shenzhen",
+      "country": "CN",
+      "latitude": 22.55,
+      "longitude": 114.07,
+      "visits": 124
+    },
+    {
+      "city": "Chengdu",
+      "country": "CN",
+      "latitude": 30.57,
+      "longitude": 104.07,
+      "visits": 190
+    },
+    {
+      "city": "Chongqing",
+      "country": "CN",
+      "latitude": 29.56,
+      "longitude": 106.55,
+      "visits": 335
+    },
+    {
+      "city": "Hangzhou",
+      "country": "CN",
+      "latitude": 30.27,
+      "longitude": 120.15,
+      "visits": 369
+    },
+    {
+      "city": "Wuhan",
+      "country": "CN",
+      "latitude": 30.59,
+      "longitude": 114.31,
+      "visits": 101
+    },
+    {
+      "city": "Nanjing",
+      "country": "CN",
+      "latitude": 32.06,
+      "longitude": 118.8,
+      "visits": 322
+    },
+    {
+      "city": "Tianjin",
+      "country": "CN",
+      "latitude": 39.08,
+      "longitude": 117.2,
+      "visits": 243
+    },
+    {
+      "city": "Suzhou",
+      "country": "CN",
+      "latitude": 31.3,
+      "longitude": 120.59,
+      "visits": 374
+    },
+    {
+      "city": "Xi’an",
+      "country": "CN",
+      "latitude": 34.34,
+      "longitude": 108.94,
+      "visits": 425
+    },
+    {
+      "city": "Changsha",
+      "country": "CN",
+      "latitude": 28.23,
+      "longitude": 112.94,
+      "visits": 452
+    },
+    {
+      "city": "Zhengzhou",
+      "country": "CN",
+      "latitude": 34.75,
+      "longitude": 113.63,
+      "visits": 307
+    },
+    {
+      "city": "Qingdao",
+      "country": "CN",
+      "latitude": 36.07,
+      "longitude": 120.38,
+      "visits": 171
+    },
+    {
+      "city": "Ningbo",
+      "country": "CN",
+      "latitude": 29.87,
+      "longitude": 121.55,
+      "visits": 229
+    },
+    {
+      "city": "Dongguan",
+      "country": "CN",
+      "latitude": 23.02,
+      "longitude": 113.75,
+      "visits": 326
+    },
+    {
+      "city": "Foshan",
+      "country": "CN",
+      "latitude": 23.02,
+      "longitude": 113.12,
+      "visits": 475
+    },
+    {
+      "city": "Hefei",
+      "country": "CN",
+      "latitude": 31.82,
+      "longitude": 117.23,
+      "visits": 412
+    },
+    {
+      "city": "Jinan",
+      "country": "CN",
+      "latitude": 36.65,
+      "longitude": 117.12,
+      "visits": 209
+    },
+    {
+      "city": "Fuzhou",
+      "country": "CN",
+      "latitude": 26.07,
+      "longitude": 119.3,
+      "visits": 466
+    },
+    {
+      "city": "Xiamen",
+      "country": "CN",
+      "latitude": 24.48,
+      "longitude": 118.09,
+      "visits": 366
+    },
+    {
+      "city": "Kunming",
+      "country": "CN",
+      "latitude": 25.04,
+      "longitude": 102.72,
+      "visits": 335
+    },
+    {
+      "city": "Dalian",
+      "country": "CN",
+      "latitude": 38.91,
+      "longitude": 121.61,
+      "visits": 473
+    },
+    {
+      "city": "Shenyang",
+      "country": "CN",
+      "latitude": 41.81,
+      "longitude": 123.43,
+      "visits": 184
+    },
+    {
+      "city": "Harbin",
+      "country": "CN",
+      "latitude": 45.8,
+      "longitude": 126.53,
+      "visits": 243
+    },
+    {
+      "city": "Changchun",
+      "country": "CN",
+      "latitude": 43.82,
+      "longitude": 125.32,
+      "visits": 442
+    },
+    {
+      "city": "Shijiazhuang",
+      "country": "CN",
+      "latitude": 38.04,
+      "longitude": 114.51,
+      "visits": 250
+    },
+    {
+      "city": "Taiyuan",
+      "country": "CN",
+      "latitude": 37.87,
+      "longitude": 112.55,
+      "visits": 343
+    },
+    {
+      "city": "Nanchang",
+      "country": "CN",
+      "latitude": 28.68,
+      "longitude": 115.86,
+      "visits": 488
+    },
+    {
+      "city": "Nanning",
+      "country": "CN",
+      "latitude": 22.82,
+      "longitude": 108.37,
+      "visits": 254
+    },
+    {
+      "city": "Guiyang",
+      "country": "CN",
+      "latitude": 26.65,
+      "longitude": 106.63,
+      "visits": 420
+    },
+    {
+      "city": "Haikou",
+      "country": "CN",
+      "latitude": 20.04,
+      "longitude": 110.2,
+      "visits": 484
+    },
+    {
+      "city": "Lanzhou",
+      "country": "CN",
+      "latitude": 36.06,
+      "longitude": 103.83,
+      "visits": 190
+    },
+    {
+      "city": "Urumqi",
+      "country": "CN",
+      "latitude": 43.83,
+      "longitude": 87.62,
+      "visits": 367
+    },
+    {
+      "city": "Hohhot",
+      "country": "CN",
+      "latitude": 40.84,
+      "longitude": 111.75,
+      "visits": 341
+    },
+    {
+      "city": "Yinchuan",
+      "country": "CN",
+      "latitude": 38.49,
+      "longitude": 106.23,
+      "visits": 285
+    },
+    {
+      "city": "Xining",
+      "country": "CN",
+      "latitude": 36.62,
+      "longitude": 101.78,
+      "visits": 352
+    },
+    {
+      "city": "Lhasa",
+      "country": "CN",
+      "latitude": 29.65,
+      "longitude": 91.12,
+      "visits": 154
+    },
+    {
+      "city": "Wuxi",
+      "country": "CN",
+      "latitude": 31.49,
+      "longitude": 120.31,
+      "visits": 337
+    }
+  ]
+}
