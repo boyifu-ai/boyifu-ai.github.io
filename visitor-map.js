@@ -10,7 +10,7 @@
   const endpoints = [...new Set([root.dataset.endpoint,root.dataset.fallbackEndpoint].filter(Boolean).map(value=>value.replace(/\/+$/,'')))];
   let map, collected = false;
   const formatCount = value => value >= 1000000 ? (Math.floor(value / 100000) / 10) + 'M+' : value >= 1000 ? Math.floor(value / 1000) + 'K+' : String(value);
-  totalElement.textContent = baseline.toLocaleString('en-US');
+  totalElement.textContent = formatCount(baseline);
   async function request(url, keepalive = false) {
     const controller = new AbortController();
     const timer = setTimeout(()=>controller.abort(),7000);
@@ -73,7 +73,7 @@
     }
     if (!summary) { drawMap([]); status.textContent = 'Visitor data is temporarily unavailable. Please try again later.'; return; }
     const total = Number.isFinite(Number(summary.totalVisits)) && summary.totalVisits !== null ? Number(summary.totalVisits) : baseline + (Number(summary.recordedVisits)||0);
-    totalElement.textContent = total.toLocaleString('en-US');
+    totalElement.textContent = formatCount(total);
     totalElement.title = total.toLocaleString('en-US') + ' cumulative visits';
     const locations = Array.isArray(summary.locations) ? summary.locations : [];
     const updated = summary.fetchedAt ? new Date(summary.fetchedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '';
