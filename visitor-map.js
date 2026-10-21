@@ -10,27 +10,33 @@
   const endpoints = [...new Set([root.dataset.endpoint,root.dataset.fallbackEndpoint].filter(Boolean).map(value=>value.replace(/\/+$/,'')))];
   let map, collected = false;
   const formatCount = value => value >= 1000000 ? (Math.floor(value / 100000) / 10) + 'M+' : value >= 1000 ? Math.floor(value / 1000) + 'K+' : String(value);
-  totalElement.textContent = formatCount(baseline);
-  async function request(url) {
+  totalElement.textContent = baseline.toLocaleString('en-US');
+  async function request(url, keepalive = false) {
     const controller = new AbortController();
     const timer = setTimeout(()=>controller.abort(),7000);
     try {
-      const response = await fetch(url,{signal:controller.signal,credentials:'omit'});
+      const response = await fetch(url,{signal:controller.signal,credentials:'omit',cache:'no-store',keepalive});
       if (!response.ok) throw new Error('Visitor data is unavailable');
       return await response.json();
     } finally { clearTimeout(timer); }
   }
-  function recordVisit() {
-    if (local || collected || !endpoints.length) return;
-    let consent;
-    try { consent = localStorage.getItem('boyifu-analytics'); } catch {}
-    if (consent !== 'granted') return;
+  async function recordVisit() {
+    if (local || collected || !endpoints.length) {
+      root.dataset.collectionStatus = local ? 'preview' : 'unavailable';
+      return;
+    }
+    // Count one page load independently of optional Google Analytics cookies.
+    // Do not retry ambiguous failures: the current API has no idempotency key.
     collected = true;
-    request(endpoints[0] + '/collect?path=' + encodeURIComponent(location.pathname)).catch(()=>{});
+    root.dataset.collectionStatus = 'pending';
+    try {
+      const result = await request(endpoints[0] + '/collect?path=' + encodeURIComponent(location.pathname), true);
+      root.dataset.collectionStatus = result.ok === true ? 'recorded' : 'unavailable';
+    } catch {
+      root.dataset.collectionStatus = 'unavailable';
+    }
   }
-  // The public map stays visible independently of optional visit collection.
-  document.addEventListener('visitor-consent',event=>{if(event.detail==='granted') recordVisit();});
-  recordVisit();
+  const visitRequest = recordVisit();
   function drawMap(locations) {
     if (!window.L) { status.textContent = 'The map could not load. Please refresh to try again.'; return; }
     if (!map) {
@@ -54,6 +60,8 @@
     setTimeout(()=>map.invalidateSize({pan:false}),0);
   }
   async function init() {
+    // Read the summary after this visit so its count and city can appear at once.
+    await visitRequest;
     let summary, snapshot = local;
     if (!local) {
       for (const endpoint of endpoints) {
@@ -65,7 +73,7 @@
     }
     if (!summary) { drawMap([]); status.textContent = 'Visitor data is temporarily unavailable. Please try again later.'; return; }
     const total = Number.isFinite(Number(summary.totalVisits)) && summary.totalVisits !== null ? Number(summary.totalVisits) : baseline + (Number(summary.recordedVisits)||0);
-    totalElement.textContent = formatCount(total);
+    totalElement.textContent = total.toLocaleString('en-US');
     totalElement.title = total.toLocaleString('en-US') + ' cumulative visits';
     const locations = Array.isArray(summary.locations) ? summary.locations : [];
     const updated = summary.fetchedAt ? new Date(summary.fetchedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '';

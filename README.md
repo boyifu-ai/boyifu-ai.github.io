@@ -28,4 +28,4 @@ bundle exec jekyll serve
 
 GitHub Pages builds the website from the repository's `master` branch. Local screenshots, build output, logs, and preview tooling are not included in the publication commit.
 
-The visitor map uses the existing Cloudflare service, with a dated snapshot fallback. Optional analytics remain consent-based; localhost previews do not record visits. The `visitor-telemetry-worker` directory retains the existing service source and is excluded from the website build.
+The visitor map uses the existing Cloudflare service, with a dated snapshot fallback. Visitor-map page views and approximate city locations are recorded automatically, independently of optional Google Analytics. No raw IP addresses are stored in the map database. Localhost previews do not record visits. The `visitor-telemetry-worker` directory retains the existing service source and is excluded from the website build.

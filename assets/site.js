@@ -116,7 +116,6 @@
         window.gtag('js', new Date()); window.gtag('config', analyticsId);
         const script = document.createElement('script'); script.async = true; script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(analyticsId); document.head.append(script);
       }
-      document.dispatchEvent(new CustomEvent('visitor-consent', {detail:'granted'}));
     }
     const stored = readPreference('boyifu-analytics');
     if (stored === 'granted') startAnalytics();

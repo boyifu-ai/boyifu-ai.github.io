@@ -4,6 +4,14 @@ title: Privacy policy
 permalink: /privacy/
 ---
 
+## Visitor map statistics / 訪客地圖統計
+
+Each page visit is counted automatically for the visitor map, without a consent popup or analytics cookies. The statistics service processes the connection IP address to estimate the country, region, and city. It stores city-level totals and daily salted hashes derived from the IP address and browser information; the visitor-map database does not store raw IP addresses. Public map locations are approximate, not precise personal addresses. Optional Google Analytics is controlled separately through Cookie settings. Local previews do not send visitor records.
+
+訪客地圖會自動統計每次頁面訪問，不需要點選彈窗，也不依賴分析 Cookie。統計服務使用連線 IP 推算國家、地區與城市，保存城市匯總數據，以及由 IP 與瀏覽器資訊產生的每日加鹽雜湊；訪客地圖資料庫不保存完整 IP。地圖上的位置屬於概略定位，並非個人精確地址。Google Analytics 為另行選擇的功能，可在 Cookie settings 中設定。本地預覽不會傳送訪問紀錄。
+
+---
+
 
 
 <div>
