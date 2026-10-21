@@ -58,7 +58,7 @@
     }
     const markers = L.featureGroup().addTo(map);
     // Small, uniform dots keep dense city regions readable at world scale.
-    const markerRadius = () => Math.min(4.2, 1.8 + Math.max(0, map.getZoom()) * .4);
+    const markerRadius = () => Math.min(4.5, 2.8 + Math.max(0, map.getZoom()) * .4);
     map.on('zoomend', () => markers.eachLayer(marker => marker.setRadius(markerRadius())));
     for (const item of locations) {
       const latitude = Number(item.latitude), longitude = Number(item.longitude);
