@@ -57,10 +57,13 @@
       new ResizeObserver(()=>map.invalidateSize({pan:false})).observe(canvas);
     }
     const markers = L.featureGroup().addTo(map);
+    // Small, uniform dots keep dense city regions readable at world scale.
+    const markerRadius = () => Math.min(4.2, 1.8 + Math.max(0, map.getZoom()) * .4);
+    map.on('zoomend', () => markers.eachLayer(marker => marker.setRadius(markerRadius())));
     for (const item of locations) {
       const latitude = Number(item.latitude), longitude = Number(item.longitude);
       if (!Number.isFinite(latitude)||!Number.isFinite(longitude)||Math.abs(latitude)>90||Math.abs(longitude)>180) continue;
-      const marker = L.circleMarker([latitude,longitude],{radius:Math.max(3.5,Math.min(10,3.1+Math.log10((Number(item.visits)||0)+1)*1.15)),color:'#254d69',weight:1.25,fillColor:'#9b2f3f',fillOpacity:.65}).addTo(markers);
+      const marker = L.circleMarker([latitude,longitude],{radius:markerRadius(),color:'#fff',weight:.55,opacity:.85,fillColor:'#9b2f3f',fillOpacity:.7}).addTo(markers);
       const tooltip = document.createElement('span');
       tooltip.textContent = [item.city,item.region,item.country].filter(value=>value&&value!=='Unknown').join(', ') + ' · ' + formatCount(Number(item.visits)||0) + ' visits';
       marker.bindTooltip(tooltip,{direction:'top',opacity:.95});

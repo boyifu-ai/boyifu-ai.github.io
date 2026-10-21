@@ -241,13 +241,6 @@
       "visits": 190
     },
     {
-      "city": "Urumqi",
-      "country": "CN",
-      "latitude": 43.83,
-      "longitude": 87.62,
-      "visits": 367
-    },
-    {
       "city": "Hohhot",
       "country": "CN",
       "latitude": 40.84,
@@ -267,13 +260,6 @@
       "latitude": 36.62,
       "longitude": 101.78,
       "visits": 352
-    },
-    {
-      "city": "Lhasa",
-      "country": "CN",
-      "latitude": 29.65,
-      "longitude": 91.12,
-      "visits": 154
     },
     {
       "city": "Wuxi",
