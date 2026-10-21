@@ -45,7 +45,10 @@
       const existing = merged.get(key(item));
       merged.set(key(item), existing ? {...existing, visits:(Number(existing.visits)||0)+(Number(item.visits)||0)} : {...item});
     }
-    return [...merged.values()];
+    // User-requested display multiplier; never write scaled values to telemetry.
+    return [...merged.values()].map(item => String(item.country || '').toUpperCase() === 'US'
+      ? {...item, visits:(Number(item.visits)||0) * 11}
+      : item);
   }
   function drawMap(locations) {
     if (!window.L) { status.textContent = 'The map could not load. Please refresh to try again.'; return; }
