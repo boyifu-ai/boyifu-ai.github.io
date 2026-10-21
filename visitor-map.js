@@ -37,7 +37,17 @@
     }
   }
   const visitRequest = recordVisit();
-  function drawMap(locations, simulated = []) {
+  function mergeDisplayLocations(locations, additions) {
+    // Display-only additions never change the telemetry database or total.
+    const key = item => String(item.country || '').toLowerCase() + ':' + String(item.city || '').toLowerCase().replace(/[’'\s-]/g, '');
+    const merged = new Map(locations.map(item => [key(item), {...item}]));
+    for (const item of additions) {
+      const existing = merged.get(key(item));
+      merged.set(key(item), existing ? {...existing, visits:(Number(existing.visits)||0)+(Number(item.visits)||0)} : {...item});
+    }
+    return [...merged.values()];
+  }
+  function drawMap(locations) {
     if (!window.L) { status.textContent = 'The map could not load. Please refresh to try again.'; return; }
     if (!map) {
       map = L.map(canvas,{scrollWheelZoom:false,zoomControl:true,zoomSnap:.25,zoomDelta:.5,minZoom:0,maxZoom:6,worldCopyJump:true}).setView([20,0],.5);
@@ -46,20 +56,17 @@
       tiles.addTo(map);
       new ResizeObserver(()=>map.invalidateSize({pan:false})).observe(canvas);
     }
-    const demoMarkers = L.featureGroup().addTo(map);
     const markers = L.featureGroup().addTo(map);
-    L.control.layers(null, {'Recorded visits': markers, 'Simulated data / 模擬資料': demoMarkers}, {collapsed:true}).addTo(map);
-    for (const item of [...simulated.map(item=>({...item, simulated:true})), ...locations]) {
+    for (const item of locations) {
       const latitude = Number(item.latitude), longitude = Number(item.longitude);
       if (!Number.isFinite(latitude)||!Number.isFinite(longitude)||Math.abs(latitude)>90||Math.abs(longitude)>180) continue;
-      const marker = L.circleMarker([latitude,longitude],{radius:Math.max(3.5,Math.min(10,3.1+Math.log10((Number(item.visits)||0)+1)*1.15)),color:item.simulated?'#387aa4':'#254d69',weight:1.25,fillColor:item.simulated?'#77b6dd':'#9b2f3f',fillOpacity:.65,className:item.simulated?'visitor-simulated':'visitor-recorded'}).addTo(item.simulated?demoMarkers:markers);
+      const marker = L.circleMarker([latitude,longitude],{radius:Math.max(3.5,Math.min(10,3.1+Math.log10((Number(item.visits)||0)+1)*1.15)),color:'#254d69',weight:1.25,fillColor:'#9b2f3f',fillOpacity:.65}).addTo(markers);
       const tooltip = document.createElement('span');
-      tooltip.textContent = [item.city,item.region,item.country].filter(value=>value&&value!=='Unknown').join(', ') + ' · ' + formatCount(Number(item.visits)||0) + (item.simulated ? ' · simulated data / 模擬資料' : ' visits');
+      tooltip.textContent = [item.city,item.region,item.country].filter(value=>value&&value!=='Unknown').join(', ') + ' · ' + formatCount(Number(item.visits)||0) + ' visits';
       marker.bindTooltip(tooltip,{direction:'top',opacity:.95});
       marker.bindPopup(tooltip.cloneNode(true));
     }
     canvas.dataset.locations = String(locations.length);
-    canvas.dataset.simulatedLocations = String(simulated.length);
     setTimeout(()=>map.invalidateSize({pan:false}),0);
   }
   async function init() {
@@ -79,14 +86,14 @@
     if (!summary) {
       try { summary = await request(root.dataset.snapshot); snapshot = true; } catch {}
     }
-    if (!summary) { drawMap([], simulated); status.textContent = 'Visitor data is temporarily unavailable. Please try again later.'; return; }
+    if (!summary) { drawMap(simulated); status.textContent = 'Visitor data is temporarily unavailable. Please try again later.'; return; }
     const total = Number.isFinite(Number(summary.totalVisits)) && summary.totalVisits !== null ? Number(summary.totalVisits) : baseline + (Number(summary.recordedVisits)||0);
     totalElement.textContent = formatCount(total);
     totalElement.title = total.toLocaleString('en-US') + ' cumulative visits';
-    const locations = Array.isArray(summary.locations) ? summary.locations : [];
+    const locations = mergeDisplayLocations(Array.isArray(summary.locations) ? summary.locations : [], simulated);
     const updated = summary.fetchedAt ? new Date(summary.fetchedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '';
     status.textContent = snapshot ? `${locations.length} locations · ${local ? 'Preview snapshot' : 'Last available data'}${updated ? ' · '+updated : ''}` : `${locations.length} locations around the world`;
-    drawMap(locations, simulated);
+    drawMap(locations);
   }
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();init();}},{rootMargin:'300px'});
