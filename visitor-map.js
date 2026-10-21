@@ -37,7 +37,7 @@
     }
   }
   const visitRequest = recordVisit();
-  function mergeDisplayLocations(locations, additions) {
+  function mergeDisplayLocations(locations, additions, overrides = []) {
     // Display-only additions never change the telemetry database or total.
     const key = item => String(item.country || '').toLowerCase() + ':' + String(item.city || '').toLowerCase().replace(/[’'\s-]/g, '');
     const merged = new Map(locations.map(item => [key(item), {...item}]));
@@ -46,9 +46,18 @@
       merged.set(key(item), existing ? {...existing, visits:(Number(existing.visits)||0)+(Number(item.visits)||0)} : {...item});
     }
     // User-requested display multiplier; never write scaled values to telemetry.
-    return [...merged.values()].map(item => String(item.country || '').toUpperCase() === 'US'
-      ? {...item, visits:(Number(item.visits)||0) * 11}
-      : item);
+    const overrideKey = item => key(item) + ':' + String(item.region || '').toLowerCase();
+    const savedCounts = new Map(overrides.map(item => [overrideKey(item), item]));
+    return [...merged.values()].map(item => {
+      if (String(item.country || '').toUpperCase() !== 'US') return item;
+      const rawVisits = Number(item.visits) || 0;
+      const saved = savedCounts.get(overrideKey(item));
+      // Preserve the saved display value as new recorded visits arrive.
+      const visits = saved
+        ? Number(saved.displayVisits) + Math.max(0, rawVisits - Number(saved.baseVisits)) * 11
+        : rawVisits * 11;
+      return {...item, visits};
+    });
   }
   function drawMap(locations) {
     if (!window.L) { status.textContent = 'The map could not load. Please refresh to try again.'; return; }
@@ -78,10 +87,13 @@
   async function init() {
     // Read the summary after this visit so its count and city can appear at once.
     await visitRequest;
-    let simulated = [];
+    let simulated = [], overrides = [];
     try {
       const demo = await request(root.dataset.demo);
-      if (demo.kind === 'simulated' && Array.isArray(demo.locations)) simulated = demo.locations;
+      if (demo.kind === 'simulated') {
+        if (Array.isArray(demo.locations)) simulated = demo.locations;
+        if (Array.isArray(demo.displayOverrides)) overrides = demo.displayOverrides;
+      }
     } catch {}
     let summary, snapshot = local;
     if (!local) {
@@ -96,7 +108,7 @@
     const total = Number.isFinite(Number(summary.totalVisits)) && summary.totalVisits !== null ? Number(summary.totalVisits) : baseline + (Number(summary.recordedVisits)||0);
     totalElement.textContent = formatCount(total);
     totalElement.title = total.toLocaleString('en-US') + ' cumulative visits';
-    const locations = mergeDisplayLocations(Array.isArray(summary.locations) ? summary.locations : [], simulated);
+    const locations = mergeDisplayLocations(Array.isArray(summary.locations) ? summary.locations : [], simulated, overrides);
     const updated = summary.fetchedAt ? new Date(summary.fetchedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '';
     status.textContent = snapshot ? `${locations.length} locations · ${local ? 'Preview snapshot' : 'Last available data'}${updated ? ' · '+updated : ''}` : `${locations.length} locations around the world`;
     drawMap(locations);

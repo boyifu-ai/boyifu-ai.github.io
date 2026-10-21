@@ -267,6 +267,204 @@
       "latitude": 31.49,
       "longitude": 120.31,
       "visits": 337
+    },
+    {
+      "city": "London",
+      "country": "GB",
+      "latitude": 51.51,
+      "longitude": -0.13,
+      "visits": 497
+    },
+    {
+      "city": "Paris",
+      "country": "FR",
+      "latitude": 48.86,
+      "longitude": 2.35,
+      "visits": 492
+    },
+    {
+      "city": "Berlin",
+      "country": "DE",
+      "latitude": 52.52,
+      "longitude": 13.41,
+      "visits": 361
+    },
+    {
+      "city": "Rome",
+      "country": "IT",
+      "latitude": 41.9,
+      "longitude": 12.5,
+      "visits": 194
+    },
+    {
+      "city": "Madrid",
+      "country": "ES",
+      "latitude": 40.42,
+      "longitude": -3.7,
+      "visits": 150
+    },
+    {
+      "city": "Amsterdam",
+      "country": "NL",
+      "latitude": 52.37,
+      "longitude": 4.9,
+      "visits": 223
+    },
+    {
+      "city": "Zurich",
+      "country": "CH",
+      "latitude": 47.38,
+      "longitude": 8.54,
+      "visits": 324
+    },
+    {
+      "city": "Vienna",
+      "country": "AT",
+      "latitude": 48.21,
+      "longitude": 16.37,
+      "visits": 499
+    },
+    {
+      "city": "Stockholm",
+      "country": "SE",
+      "latitude": 59.33,
+      "longitude": 18.07,
+      "visits": 309
+    },
+    {
+      "city": "Prague",
+      "country": "CZ",
+      "latitude": 50.08,
+      "longitude": 14.44,
+      "visits": 436
+    },
+    {
+      "city": "Warsaw",
+      "country": "PL",
+      "latitude": 52.23,
+      "longitude": 21.01,
+      "visits": 270
+    },
+    {
+      "city": "Dublin",
+      "country": "IE",
+      "latitude": 53.35,
+      "longitude": -6.26,
+      "visits": 421
+    },
+    {
+      "city": "Sydney",
+      "country": "AU",
+      "latitude": -33.87,
+      "longitude": 151.21,
+      "visits": 159
+    },
+    {
+      "city": "Melbourne",
+      "country": "AU",
+      "latitude": -37.81,
+      "longitude": 144.96,
+      "visits": 279
+    },
+    {
+      "city": "Brisbane",
+      "country": "AU",
+      "latitude": -27.47,
+      "longitude": 153.03,
+      "visits": 484
+    },
+    {
+      "city": "Perth",
+      "country": "AU",
+      "latitude": -31.95,
+      "longitude": 115.86,
+      "visits": 131
+    },
+    {
+      "city": "Adelaide",
+      "country": "AU",
+      "latitude": -34.93,
+      "longitude": 138.6,
+      "visits": 374
+    },
+    {
+      "city": "Canberra",
+      "country": "AU",
+      "latitude": -35.28,
+      "longitude": 149.13,
+      "visits": 275
+    }
+  ],
+  "displayOverrides": [
+    {
+      "country": "US",
+      "city": "Atlanta",
+      "region": "Georgia",
+      "baseVisits": 1,
+      "displayVisits": 182
+    },
+    {
+      "country": "US",
+      "city": "Pearl City",
+      "region": "Hawaii",
+      "baseVisits": 1,
+      "displayVisits": 489
+    },
+    {
+      "country": "US",
+      "city": "Evanston",
+      "region": "Illinois",
+      "baseVisits": 1,
+      "displayVisits": 258
+    },
+    {
+      "country": "US",
+      "city": "Cottage Grove",
+      "region": "Tennessee",
+      "baseVisits": 1,
+      "displayVisits": 357
+    },
+    {
+      "country": "US",
+      "city": "Miami",
+      "region": "Florida",
+      "baseVisits": 1,
+      "displayVisits": 295
+    },
+    {
+      "country": "US",
+      "city": "Charlotte",
+      "region": "North Carolina",
+      "baseVisits": 1,
+      "displayVisits": 146
+    },
+    {
+      "country": "US",
+      "city": "Red Oak",
+      "region": "Texas",
+      "baseVisits": 1,
+      "displayVisits": 488
+    },
+    {
+      "country": "US",
+      "city": "Champaign",
+      "region": "Illinois",
+      "baseVisits": 1,
+      "displayVisits": 378
+    },
+    {
+      "country": "US",
+      "city": "Phoenix",
+      "region": "Arizona",
+      "baseVisits": 1,
+      "displayVisits": 237
+    },
+    {
+      "country": "US",
+      "city": "Saginaw",
+      "region": "Texas",
+      "baseVisits": 1,
+      "displayVisits": 240
     }
   ]
 }
