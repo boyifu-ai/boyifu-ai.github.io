@@ -95,3 +95,6 @@
 /* Keep the complete company name together beneath the centered portrait. */
 .portrait img{margin-inline:auto}
 .portrait figcaption{text-align:center;text-align-last:auto}
+
+@media screen and (min-width:761px){.portrait figcaption{font-size:14px}}
+@media screen and (min-width:1500px){.portrait figcaption{font-size:15px}}
