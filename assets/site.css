@@ -91,3 +91,7 @@
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 @media print{.navigation,.menu-toggle,.site-footer,.cookie-banner,.hero-links,.about-toc,.language-switch,.copy-email,.post-navigation{display:none!important}.shell{width:100%}body{background:white;color:black;font-size:11pt}.hero{padding:20px 0}.publication,.education-item{break-inside:avoid}.page-heading{padding-top:20px}.about-page{display:block}a{color:inherit}}
+
+/* Keep the complete company name together beneath the centered portrait. */
+.portrait img{margin-inline:auto}
+.portrait figcaption{text-align:center;text-align-last:auto}
