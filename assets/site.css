@@ -57,8 +57,8 @@
 .research-motto{border-left:1px solid var(--line);padding-left:30px}
 .research-motto>.eyebrow{display:block;margin-bottom:16px}
 .research-motto blockquote{margin:0}
-.research-motto blockquote p{font-size:14px;line-height:1.9;text-align:justify;text-align-last:auto;hyphens:auto}
-.research-motto blockquote p[lang="zh-Hant"]{color:var(--ink);line-height:2;text-justify:inter-character}
+.research-motto blockquote p{color:var(--muted);font-size:14px;line-height:1.9;text-align:justify;text-align-last:auto;hyphens:auto}
+.research-motto blockquote p[lang="zh-Hant"]{line-height:2;text-justify:inter-character}
 .research-motto blockquote p:last-child{margin-bottom:0}
 @media(max-width:760px){.research-motto{border-left:0;border-top:1px solid var(--line);padding:22px 0 0}}
 .contact-telephone{border-top:1px solid var(--line);padding-top:22px}
