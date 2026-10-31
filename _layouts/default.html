@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f9f9f6">
   {% assign display_title = page.title | default: site.name %}
-  <title>{{ display_title | escape }}{% if page.title %} · Boyi Fu{% endif %}</title>
+  <title>{% if page.url == "/" %}付博亦 Boyi Fu{% else %}{{ display_title | escape }}{% if page.title %} · Boyi Fu{% endif %}{% endif %}</title>
   <meta name="description" content="{{ page.description | default: site.description | escape }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
